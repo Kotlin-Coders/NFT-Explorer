@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">NFT Explorer</string>
+    <string name="rank">RANK #</string>
+    <string name="trending_nfts">Trending NFT\'s 🔥</string>
+    <string name="ranking_coins">Ranking of Coins 💰</string>
+    <string name="connection_error">Connection error</string>
+    <string name="retry">Retry</string>
 </resources>
