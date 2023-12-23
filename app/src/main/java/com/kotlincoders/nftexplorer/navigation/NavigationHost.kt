@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.kotlincoders.nftexplorer.home.presentation.home.HomeScreen
+import com.kotlincoders.nftexplorer.home.presentation.nft_detail.NftDetailScreen
 
 @Composable
 fun NavigationHost(
@@ -26,7 +27,7 @@ fun NavigationHost(
         }
         //nft detail
         composable(NavigationRoute.Nftdetail.route) {
-            Text(text = "NFT DETAIL")
+            NftDetailScreen()
         }
     }
 }

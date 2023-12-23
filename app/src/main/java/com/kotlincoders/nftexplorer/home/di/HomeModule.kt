@@ -4,6 +4,7 @@ import com.kotlincoders.nftexplorer.home.data.remote.NftExplorerApi
 import com.kotlincoders.nftexplorer.home.data.repository.HomeRepositoryImpl
 import com.kotlincoders.nftexplorer.home.domain.repository.HomeRepository
 import com.kotlincoders.nftexplorer.home.domain.usecase.GetCoinsUseCase
+import com.kotlincoders.nftexplorer.home.domain.usecase.GetNftDetailsUseCase
 import com.kotlincoders.nftexplorer.home.domain.usecase.GetNftsUseCase
 import dagger.Module
 import dagger.Provides
@@ -43,6 +44,12 @@ class HomeModule {
     @Provides
     fun provideNftsUseCase(repository: HomeRepository): GetNftsUseCase {
         return GetNftsUseCase(repository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideNftDetailsUseCase(repository: HomeRepository): GetNftDetailsUseCase {
+        return GetNftDetailsUseCase(repository)
     }
 
 }

@@ -2,9 +2,11 @@ package com.kotlincoders.nftexplorer.home.data.remote
 
 import com.kotlincoders.nftexplorer.BuildConfig
 import com.kotlincoders.nftexplorer.home.data.remote.dto.coins.CoinsDtoResponse
+import com.kotlincoders.nftexplorer.home.data.remote.dto.nft_detail.NftDetailDtoResponse
 import com.kotlincoders.nftexplorer.home.data.remote.dto.nfts.NftsDtoResponse
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Path
 
 interface NftExplorerApi {
     companion object {
@@ -23,5 +25,12 @@ interface NftExplorerApi {
         @Header("accept") acceptHeader: String = "application/json",
         @Header("X-API-KEY") apiKey: String = API_KEY
     ): NftsDtoResponse
+
+    @GET("nft/collection/{nft_address}")
+    suspend fun getNftDetails(
+        @Path("nft_address") nftAddress: String,
+        @Header("accept") acceptHeader: String = "application/json",
+        @Header("X-API-KEY") apiKey: String = API_KEY,
+    ):NftDetailDtoResponse
 
 }
