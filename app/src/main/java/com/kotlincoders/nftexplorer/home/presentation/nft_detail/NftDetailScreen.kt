@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -27,6 +28,9 @@ import com.kotlincoders.nftexplorer.R
 import com.kotlincoders.nftexplorer.core.presentation.NftExplorerCircularProgress
 import com.kotlincoders.nftexplorer.core.presentation.NftExplorerConnectionError
 import com.kotlincoders.nftexplorer.core.presentation.NftExplorerDataItem
+import com.kotlincoders.nftexplorer.core.presentation.NftExplorerVerticalGrid
+import com.kotlincoders.nftexplorer.home.presentation.home.components.CoinItem
+import com.kotlincoders.nftexplorer.home.presentation.nft_detail.components.NftAssetsItem
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -42,80 +46,91 @@ fun NftDetailScreen(
     ) {
         if (state.isError) {
             NftExplorerConnectionError(onRetry = { viewModel.getNftDetails() })
-        } else if (state.nftDetails != null) /*&& state.nfts.isNotEmpty()) */ {
+        } else if ((state.nftDetails != null) && state.nftCollectionAssets.isNotEmpty()) {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
             ) {
-                Column(Modifier.fillMaxSize()) {
-                    Box(
-                        modifier = Modifier.fillMaxWidth(),
-                    ) {
-                        AsyncImage(
-                            model = state.nftDetails.bannerImg,
-                            contentDescription = null,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(170.dp)
-                                .clip(
-                                    shape = RoundedCornerShape(
-                                        topStart = 0.dp,
-                                        topEnd = 0.dp,
-                                        bottomEnd = 20.dp,
-                                        bottomStart = 20.dp
-                                    )
-                                ),
-                            contentScale = ContentScale.Crop
-                        )
-                        Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(top = 120.dp),
-                            horizontalAlignment = Alignment.CenterHorizontally
+                LazyColumn(Modifier.fillMaxSize()) {
+                    item {
+                        Box(
+                            modifier = Modifier.fillMaxWidth(),
                         ) {
                             AsyncImage(
-                                model = state.nftDetails.img,
+                                model = state.nftDetails.bannerImg,
                                 contentDescription = null,
                                 modifier = Modifier
-                                    .width(100.dp)
-                                    .height(100.dp)
+                                    .fillMaxWidth()
+                                    .height(170.dp)
                                     .clip(
-                                        shape = RoundedCornerShape(20.dp)
+                                        shape = RoundedCornerShape(
+                                            topStart = 0.dp,
+                                            topEnd = 0.dp,
+                                            bottomEnd = 20.dp,
+                                            bottomStart = 20.dp
+                                        )
                                     ),
-                                contentScale = ContentScale.Crop,
+                                contentScale = ContentScale.Crop
                             )
+                            Column(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(top = 120.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                AsyncImage(
+                                    model = state.nftDetails.img,
+                                    contentDescription = null,
+                                    modifier = Modifier
+                                        .width(100.dp)
+                                        .height(100.dp)
+                                        .clip(
+                                            shape = RoundedCornerShape(20.dp)
+                                        ),
+                                    contentScale = ContentScale.Crop,
+                                )
+                                Text(
+                                    text = state.nftDetails.name,
+                                    style = MaterialTheme.typography.titleMedium
+                                )
+                            }
+                        }
+                    }
+                    item {
+                        Column(
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 16.dp)
+                        ) {
+                            Spacer(modifier = Modifier.height(16.dp))
+                            NftExplorerDataItem(
+                                firstTitle = stringResource(R.string.creator_fee),
+                                firstData = state.nftDetails.creatorFee.toString() + "%",
+                                secondTitle = stringResource(R.string.total_supply),
+                                secondData = state.nftDetails.totalSupply.toString()
+                            )
+                            Spacer(modifier = Modifier.height(28.dp))
+                            NftExplorerDataItem(
+                                firstTitle = stringResource(R.string.floor_price),
+                                firstData = "${state.nftDetails.floorPriceMc.toString()} ${state.nftDetails.blockchain.toString()}",
+                                secondTitle = stringResource(R.string.volumen),
+                                secondData = state.nftDetails.volume.toString()
+                            )
+                            Spacer(modifier = Modifier.height(16.dp))
                             Text(
-                                text = state.nftDetails.name,
+                                stringResource(R.string.collection),
                                 style = MaterialTheme.typography.titleMedium
                             )
                         }
                     }
-                    Column(
-                        Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 16.dp)
-                    ) {
-                        Spacer(modifier = Modifier.height(16.dp))
-                        NftExplorerDataItem(
-                            firstTitle = stringResource(R.string.creator_fee),
-                            firstData = state.nftDetails.creatorFee.toString() + "%",
-                            secondTitle = stringResource(R.string.total_supply),
-                            secondData = state.nftDetails.totalSupply.toString()
-                        )
-                        Spacer(modifier = Modifier.height(28.dp))
-                        NftExplorerDataItem(
-                            firstTitle = stringResource(R.string.floor_price),
-                            firstData = state.nftDetails.floorPriceMc.toString(),
-                            secondTitle = stringResource(R.string.volumen),
-                            secondData = state.nftDetails.totalVolume.toString()
-                        )
-                        Spacer(modifier = Modifier.height(16.dp))
-                        Text(
-                            stringResource(R.string.collection),
-                            style = MaterialTheme.typography.titleMedium
+                    item {
+                        NftExplorerVerticalGrid(
+                            modifier = Modifier.fillMaxWidth(),
+                            items = state.nftCollectionAssets.map {
+                                { NftAssetsItem(it) }
+                            }
                         )
                     }
-
 
                 }
             }

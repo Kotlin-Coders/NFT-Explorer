@@ -9,7 +9,7 @@ data class NftDetailDtoResponse(
     val blockchain: String,
     val count: Int,
     val createdDate: String,
-    val creatorFee: Int,
+    val creatorFee: Double,
     val description: String,
     val floorPriceChange24h: Double,
     val floorPriceChange7d: Double,
@@ -69,6 +69,7 @@ fun NftDetailDtoResponse.toNftDetail(): NftDetails {
         creatorFee = this.creatorFee,
         totalSupply = this.totalSupply,
         floorPriceMc = this.floorPriceMc,
-        totalVolume = this.totalVolume
+        volume = this.volume,
+        blockchain = this.blockchain
     )
 }
