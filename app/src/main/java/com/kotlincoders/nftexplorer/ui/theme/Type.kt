@@ -30,6 +30,6 @@ val Typography = Typography(
     titleSmall = TextStyle(
         fontFamily = NftsExplorerFontFamily,
         fontWeight = FontWeight.Bold,
-        fontSize = 16.sp
+        fontSize = 20.sp
     )
 )

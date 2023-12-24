@@ -32,7 +32,7 @@ import com.kotlincoders.nftexplorer.core.presentation.NftExplorerVerticalGrid
 @Composable
 fun HomeScreen(
     onCoinDetail: () -> Unit,
-    onNftDetail: () -> Unit,
+    onNftDetail: (String) -> Unit,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val state = viewModel.state
@@ -74,7 +74,7 @@ fun HomeScreen(
                         item {
                             LazyRow(contentPadding = PaddingValues(8.dp)) {
                                 items(state.nfts) {
-                                    NftItem(it, { onNftDetail() })
+                                    NftItem(it, { onNftDetail(it.address) })
                                 }
                             }
                         }
