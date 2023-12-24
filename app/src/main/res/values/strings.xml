@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">NFT Explorer</string>
+    <string name="rank">RANK #</string>
+    <string name="trending_nfts">Trending NFT\'s 🔥</string>
+    <string name="ranking_coins">Ranking of Coins 💰</string>
+    <string name="connection_error">Connection error</string>
+    <string name="retry">Retry</string>
+
+<!--    NFT DETAILS-->
+    <string name="creator_fee">Creator Fee</string>
+    <string name="total_supply">Total Supply</string>
+    <string name="floor_price">Floor Price</string>
+    <string name="volumen">Volumen</string>
+    <string name="collection">Collection</string>
 </resources>
