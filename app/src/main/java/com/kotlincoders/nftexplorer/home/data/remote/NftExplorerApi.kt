@@ -1,6 +1,7 @@
 package com.kotlincoders.nftexplorer.home.data.remote
 
 import com.kotlincoders.nftexplorer.BuildConfig
+import com.kotlincoders.nftexplorer.home.data.remote.dto.coin_detail.CoinDetailsDtoResponse
 import com.kotlincoders.nftexplorer.home.data.remote.dto.coins.CoinsDtoResponse
 import com.kotlincoders.nftexplorer.home.data.remote.dto.nft_collection_assets.NftCollectionAssetsDtoResponse
 import com.kotlincoders.nftexplorer.home.data.remote.dto.nft_detail.NftDetailDtoResponse
@@ -40,5 +41,12 @@ interface NftExplorerApi {
         @Header("accept") acceptHeader: String = "application/json",
         @Header("X-API-KEY") apiKey: String = API_KEY,
     ):NftCollectionAssetsDtoResponse
+
+    @GET("coins/{coinId}")
+    suspend fun getCoinDetails(
+        @Path("coinId") coinId: String,
+        @Header("accept") acceptHeader: String = "application/json",
+        @Header("X-API-KEY") apiKey: String = API_KEY,
+    ):CoinDetailsDtoResponse
 
 }

@@ -31,7 +31,7 @@ import com.kotlincoders.nftexplorer.core.presentation.NftExplorerVerticalGrid
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    onCoinDetail: () -> Unit,
+    onCoinDetail: (String) -> Unit,
     onNftDetail: (String) -> Unit,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
@@ -89,7 +89,7 @@ fun HomeScreen(
                             NftExplorerVerticalGrid(
                                 modifier = Modifier.fillMaxWidth(),
                                 items = state.coins.map {
-                                    { CoinItem(it, { onCoinDetail() }) }
+                                    { CoinItem(it, { onCoinDetail(it.id) }) }
                                 }
                             )
                         }
