@@ -137,8 +137,6 @@ fun CoinDetailScreen(
                             )
                         }
                     }
-                    //chart
-
                     item {
                         Text(
                             text = stringResource(R.string.social),

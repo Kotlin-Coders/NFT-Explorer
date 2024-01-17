@@ -48,5 +48,4 @@ interface NftExplorerApi {
         @Header("accept") acceptHeader: String = "application/json",
         @Header("X-API-KEY") apiKey: String = API_KEY,
     ):CoinDetailsDtoResponse
-
 }

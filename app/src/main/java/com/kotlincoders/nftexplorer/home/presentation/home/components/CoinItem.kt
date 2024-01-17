@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.SubcomposeAsyncImage
 import com.kotlincoders.nftexplorer.R
@@ -66,6 +67,8 @@ fun CoinItem(
             Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = coin.name.uppercase(),
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 1,
                 style = MaterialTheme.typography.titleSmall,
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.secondary,
