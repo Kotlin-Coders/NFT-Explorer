@@ -7,6 +7,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.kotlincoders.nftexplorer.home.presentation.coin_detail.CoinDetailScreen
 import com.kotlincoders.nftexplorer.home.presentation.home.HomeScreen
 import com.kotlincoders.nftexplorer.home.presentation.nft_detail.NftDetailScreen
 
@@ -18,15 +19,21 @@ fun NavigationHost(
         //home
         composable(NavigationRoute.Home.route) {
             HomeScreen(onCoinDetail = {
-                navHostController.navigate(NavigationRoute.Coindetail.route)
+                navHostController.navigate(NavigationRoute.Coindetail.route + "?coinId=$it")
             }, onNftDetail = {
                 navHostController.navigate(NavigationRoute.Nftdetail.route + "?nftAddress=$it")
             })
         }
         //coin detail
-        composable(NavigationRoute.Coindetail.route) {
-            Text(text = "COIN DETAIL")
+        composable(
+            NavigationRoute.Coindetail.route + "?coinId={coinId}",
+            arguments = listOf(navArgument("coinId") {
+                type = NavType.StringType
+            })
+        ) {
+            CoinDetailScreen()
         }
+
         //nft detail
         composable(
             NavigationRoute.Nftdetail.route + "?nftAddress={nftAddress}",
