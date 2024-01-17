@@ -33,7 +33,6 @@ import com.kotlincoders.nftexplorer.home.presentation.home.components.CoinItem
 import com.kotlincoders.nftexplorer.home.presentation.nft_detail.components.NftAssetsItem
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NftDetailScreen(
     viewModel: NftDetailViewModel = hiltViewModel()

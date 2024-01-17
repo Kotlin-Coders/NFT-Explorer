@@ -2,8 +2,10 @@ package com.kotlincoders.nftexplorer.home.data.repository
 
 import com.kotlincoders.nftexplorer.home.data.mapper.toDomain
 import com.kotlincoders.nftexplorer.home.data.remote.NftExplorerApi
+import com.kotlincoders.nftexplorer.home.data.remote.dto.coin_detail.toCoinDetails
 import com.kotlincoders.nftexplorer.home.data.remote.dto.nft_detail.toNftDetail
 import com.kotlincoders.nftexplorer.home.domain.model.Coin
+import com.kotlincoders.nftexplorer.home.domain.model.CoinDetails
 import com.kotlincoders.nftexplorer.home.domain.model.Nft
 import com.kotlincoders.nftexplorer.home.domain.model.NftCollectionAssets
 import com.kotlincoders.nftexplorer.home.domain.model.NftDetails
@@ -16,6 +18,15 @@ class HomeRepositoryImpl(
         return try{
             val coins = api.getCoins().result.map {it.toDomain()}
             Result.success(coins)
+        }catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    override suspend fun getCoinDetails(coinId: String): Result<CoinDetails> {
+        return try{
+            val coinDetails = api.getCoinDetails(coinId).toCoinDetails()
+            Result.success(coinDetails)
         }catch (e: Exception) {
             Result.failure(e)
         }
