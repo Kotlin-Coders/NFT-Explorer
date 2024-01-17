@@ -61,7 +61,7 @@ API_KEY="api key here"
 
 ## Contributing
 
-We welcome contributions! If you want to contribute to OverData, please fork the repository and create a pull request. For major changes, please open an issue first to discuss the proposed changes.
+We welcome contributions! If you want to contribute to NFT Explorer, please fork the repository and create a pull request. For major changes, please open an issue first to discuss the proposed changes.
 
 License
 --------
